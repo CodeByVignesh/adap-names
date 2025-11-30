@@ -1,4 +1,5 @@
 import { Node } from "./Node";
+import { IllegalArgumentException } from "../common/IllegalArgumentException";
 
 export class Directory extends Node {
 
@@ -9,15 +10,18 @@ export class Directory extends Node {
     }
 
     public hasChildNode(cn: Node): boolean {
+        IllegalArgumentException.assert(cn !== null && cn !== undefined, "Child node cannot be null or undefined");
         return this.childNodes.has(cn);
     }
 
     public addChildNode(cn: Node): void {
+        IllegalArgumentException.assert(cn !== null && cn !== undefined, "Child node cannot be null or undefined");
         this.childNodes.add(cn);
     }
 
     public removeChildNode(cn: Node): void {
-        this.childNodes.delete(cn); // Yikes! Should have been called remove
+        IllegalArgumentException.assert(cn !== null && cn !== undefined, "Child node cannot be null or undefined");
+        this.childNodes.delete(cn);
     }
 
 }

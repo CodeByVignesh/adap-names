@@ -1,5 +1,6 @@
 import { Node } from "./Node";
 import { Directory } from "./Directory";
+import { IllegalArgumentException } from "../common/IllegalArgumentException";
 
 export class Link extends Node {
 
@@ -7,8 +8,7 @@ export class Link extends Node {
 
     constructor(bn: string, pn: Directory, tn?: Node) {
         super(bn, pn);
-
-        if (tn != undefined) {
+        if (tn !== undefined) {
             this.targetNode = tn;
         }
     }
@@ -18,6 +18,7 @@ export class Link extends Node {
     }
 
     public setTargetNode(target: Node): void {
+        IllegalArgumentException.assert(target !== null && target !== undefined, "Target node cannot be null or undefined");
         this.targetNode = target;
     }
 
@@ -27,12 +28,13 @@ export class Link extends Node {
     }
 
     public rename(bn: string): void {
+        IllegalArgumentException.assert(bn !== null && bn !== undefined, "Base name cannot be null or undefined");
         const target = this.ensureTargetNode(this.targetNode);
         target.rename(bn);
     }
 
     protected ensureTargetNode(target: Node | null): Node {
-        const result: Node = this.targetNode as Node;
-        return result;
+        IllegalArgumentException.assert(target !== null && target !== undefined, "Target node must be set before use");
+        return target as Node;
     }
 }

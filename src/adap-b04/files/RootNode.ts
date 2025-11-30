@@ -23,11 +23,11 @@ export class RootNode extends Directory {
     }
 
     public move(to: Directory): void {
-        // null operation
+        // null operation - root cannot be moved
     }
 
     protected doSetBaseName(bn: string): void {
-        // null operation
+        // null operation - root cannot be renamed
     }
 
 }

@@ -1,11 +1,11 @@
 import { Node } from "./Node";
 import { Directory } from "./Directory";
-import { MethodFailedException } from "../common/MethodFailedException";
+import { IllegalArgumentException } from "../common/IllegalArgumentException";
 
 enum FileState {
     OPEN,
     CLOSED,
-    DELETED        
+    DELETED
 };
 
 export class File extends Node {
@@ -17,16 +17,19 @@ export class File extends Node {
     }
 
     public open(): void {
-        // do something
+        IllegalArgumentException.assert(this.state === FileState.CLOSED, "File must be closed before opening");
+        this.state = FileState.OPEN;
     }
 
     public read(noBytes: number): Int8Array {
-        // read something
-        return new Int8Array();
+        IllegalArgumentException.assert(noBytes >= 0, "Number of bytes cannot be negative");
+        IllegalArgumentException.assert(this.state === FileState.OPEN, "File must be open for reading");
+        return new Int8Array(noBytes);
     }
 
     public close(): void {
-        // do something
+        IllegalArgumentException.assert(this.state === FileState.OPEN, "File must be open before closing");
+        this.state = FileState.CLOSED;
     }
 
     protected doGetFileState(): FileState {
