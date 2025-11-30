@@ -18,7 +18,10 @@ export class StringArrayName extends AbstractName {
     }
 
     public asString(delimiter: string = this.delimiter): string {
-        IllegalArgumentException.assert(delimiter && delimiter.length === 1, "Delimiter must be a single character");
+        IllegalArgumentException.assert(
+            delimiter !== null && delimiter !== undefined && delimiter.length === 1,
+            "Delimiter must be a single character"
+        );
         return this.components.join(delimiter);
     }
 
