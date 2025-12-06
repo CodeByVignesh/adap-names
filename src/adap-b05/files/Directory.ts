@@ -20,4 +20,9 @@ export class Directory extends Node {
         this.childNodes.delete(cn); // Yikes! Should have been called remove
     }
 
+    /** Iterable view of children for traversal */
+    public getChildNodes(): Iterable<Node> {
+        return this.childNodes.values();
+    }
+
 }
