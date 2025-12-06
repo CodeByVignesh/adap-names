@@ -64,13 +64,13 @@ describe("Buggy setup test", () => {
     try {
       let fs: RootNode = createBuggySetup();
       fs.findNodes("ls");
-    } catch(er) {
+    } catch (er) {
       threwException = true;
-      // let ex: Exception = er as Exception;
-      // expect(ex).toBeInstanceOf(ServiceFailureException);
-      // expect(ex.hasTrigger()).toBe(true);
-      // let tx: Exception = ex.getTrigger();
-      // expect(tx).toBeInstanceOf(InvalidStateException);
+      let ex: Exception = er as Exception;
+      expect(ex).toBeInstanceOf(ServiceFailureException);
+      expect(ex.hasTrigger()).toBe(true);
+      let tx: Exception = ex.getTrigger();
+      expect(tx).toBeInstanceOf(InvalidStateException);
     }
     expect(threwException).toBe(true);
   });
